@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+
+<html>
+    <head>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-database.js"></script>
+
+        <script>  
+        
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyAOAwSXP3hD8YxA-N4pQcXPIYPEzI-apXM",
+                authDomain: "attendance-project-119ce.firebaseapp.com",
+                databaseURL: "https://attendance-project-119ce.firebaseio.com",
+                projectId: "attendance-project-119ce",
+                storageBucket: "attendance-project-119ce.appspot.com",
+                messagingSenderId: "787183942830",
+                appId: "1:787183942830:web:a15b6e056fa9bef5dfc13f",
+                measurementId: "G-7K0M2PMP6K"
+            };
+
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            firebase.analytics();
+
+
+
+            function check()
+            {          
+
+                var a = document.getElementById("RN").value;
+                var b = parseInt(document.getElementById("SN").value);
+
+                if(/[1-9]{2}[A-Za-z]{3}[0-9]{4}/i.test(a))
+                {
+                    firebase.database().ref('/').once('value', function(snapshot) 
+                    {
+                        snapshot.forEach(function(childSnapshot)
+                        {
+                            var c = childSnapshot.val();
+                            if(b>c['total'])
+                                alert("Maximum students present today were "+c['total']+"!");
+                            else if(b<=0)
+                                alert("Please enter a valid serial number!");
+                            else
+                            {
+                                postToGoogle();
+                                localStorage.setItem('RegNo',a);
+                                localStorage.setItem('SerNo',b);
+                                document.write("Your attendance has been submitted!");
+                            }
+                        })                    
+                    })   
+                }
+                else
+                    alert("Wrong Registration Number!");
+
+                             
+            }
+            
+
+
+            function postToGoogle() 
+            {
+                var field1 = $("#SN").val();
+                var field2 = $("#RN").val();
+                 
+                if(field1 == "")
+                {
+                    alert('Please enter your serial number');
+                    document.getElementById("SN").focus();
+                    return false;
+                }
+                if(field2 == "")
+                {
+                    alert('Please enter your registration number');
+                    document.getElementById("RN").focus();
+                    return false;
+                }
+                           
+                $.ajax({
+                    url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSePCcAxv5wKz2r0WK1VI4nn17gfv1Me0Mujjj_pVbqJSCHntw/formResponse?",
+                    data: {"entry.590375423": field1, "entry.205258173": field2},
+                    type: "POST",
+                    dataType: "xml",
+                    success: function(d)
+                    {
+                    },
+                    error: function(x, y)
+                        {
+        
+                            $('#success-msg').show();
+                            $('#form').hide();
+                                    
+                        }
+                });
+                 return false;
+             }
+
+            </script>
+ 
+        <title>
+            Attendance
+        </title>
+
+        <h1>Student's Interface</h1>
+        
+        <div style="color:red">
+            <table>
+
+                <tr>
+                    <td> Faculty </td>
+                    <td> - </td>
+                    <td> Balaji. J </td>
+                </tr>
+
+                <tr>
+                    <td> Course </td>
+                    <td> - </td>
+                    <td> Lean Startup Management (MGT1022) </td>
+                </tr>
+
+            </table>
+        </div>
+
+        <br> <br>
+
+    </head>
+
+    <body>
+
+        <form id="f" target="_self" onsubmit="return postToGoogle();" action="">
+            <table>
+
+                <tr>
+                    <td> Serial Number  </td>
+                    <td> - </td>
+                    <td> <input type="text" id="SN" size="9" name="entry.622235963"> </td>
+                </tr>
+
+                <tr>
+                    <td> Registration Number </td>
+                    <td> - </td>
+                    <td> <input type="text" id="RN" size="9" name="entry.1710755663"> </td>
+                </tr>
+
+            </table>       
+        
+        <br> <br>
+        <input type="button" value="Submit" onclick="check();">
+        </form>
+
+    </body>
+    
+</html>

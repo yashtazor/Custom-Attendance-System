@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+
+        <title>
+            Unique Attendance System.
+        </title>
+
+        <script>
+
+            function TDisplay()
+            {                
+                document.getElementById("Pass").style.display='block';                
+            }
+
+            function SDisplay()
+            {                
+                window.location.href = "Student.html";          
+            }
+
+            function Check()
+            {
+                var pass = "lsm@123";
+                var entry = document.getElementById("password").value;
+
+                if(pass == entry)
+                    window.location.href = "Teacher.html";
+                else
+                    alert("Wrong password! Please re-enter the password.");   
+            }
+
+        </script>
+
+    </head>
+
+    <h1>
+        Unique Attendance System
+    </h1>
+
+    <button id="teacher" onclick="TDisplay()"> Teacher's Interface </button> <br>
+    <p style="display: none;" id="Pass">
+        Password <input type="password" id="password"> <br> <br>
+        <button value="Submit" id="submitpass" onclick="Check()"> Submit </button>
+    </p>
+    
+    <br>
+    <button id="student" onclick="SDisplay()"> Student's Interface </button> 
+
+
+</html>

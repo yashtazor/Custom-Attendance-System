@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+
+    <head>
+
+        <title>
+            Teacher's Interface
+        </title>
+
+        <script>
+
+            var x;
+
+            function submit()
+            {
+                x = document.getElementById("count").value;
+                localStorage.setItem('Total',x);
+            }            
+
+        </script>
+
+    </head>
+
+    <h1>
+        Teacher's Interface
+    </h1>
+
+    <body>
+
+        <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-database.js"></script>
+
+        <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyAOAwSXP3hD8YxA-N4pQcXPIYPEzI-apXM",
+            authDomain: "attendance-project-119ce.firebaseapp.com",
+            databaseURL: "https://attendance-project-119ce.firebaseio.com",
+            projectId: "attendance-project-119ce",
+            storageBucket: "attendance-project-119ce.appspot.com",
+            messagingSenderId: "787183942830",
+            appId: "1:787183942830:web:a15b6e056fa9bef5dfc13f",
+            measurementId: "G-7K0M2PMP6K"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        function getData()
+        {
+            firebase.database().ref("User").set({
+                total: document.getElementById("count").value,
+            });
+        }
+
+        </script>
+
+        Please select the course <br>
+        <select>
+            <option value="--">--</option>
+            <option value="MGT 1041 - Lean Startup Management">MGT 1022 - Lean Startup Management</option>
+        </select>
+
+        <br> <br>
+
+        Enter the number of students present today <br> <input type="text" id="count"> <br> <br>
+        <button id="submit" onclick="submit(); getData();">Submit</button>
+
+    </body>
+
+</html>
