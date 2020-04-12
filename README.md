@@ -1,4 +1,4 @@
-# Custom-Attendance-System
+# Custom Attendance System
 
 An attendance system which was made according to my teacher's need.
 
@@ -17,4 +17,7 @@ number set by the teacher, no input in taken.
 4. Send this data to firebase if details are valid.
 5. Use AJAX to send this data to the google spreadsheet created in any drive.
 
-
+##### How to use?
+1. Replace the Google Drive Link in the Student.html file with your Google Drive link.
+2. Replace the names as per your Google Drive names (Can be found by inspecting the page source).
+3. Run the index.html file.
