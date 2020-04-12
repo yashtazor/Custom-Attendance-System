@@ -18,6 +18,6 @@ number set by the teacher, no input in taken.
 5. Use AJAX to send this data to the google spreadsheet created in any drive.
 
 ##### How to use?
-1. Replace the Google Drive Link in the Student.html file with your Google Drive link.
-2. Replace the names as per your Google Drive names (Can be found by inspecting the page source).
+1. Replace the Google Drive Link in the Student.html file with your Google Sheet link.
+2. Replace the names as per your Google Sheet names (Can be found by inspecting the page source of Google Sheet).
 3. Run the index.html file.
