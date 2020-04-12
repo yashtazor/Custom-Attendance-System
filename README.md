@@ -1,4 +1,4 @@
-# Custom Attendance System
+# Custom Attendance System.
 
 An attendance system which was made according to my teacher's need.
 
